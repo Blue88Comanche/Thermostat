@@ -1,5 +1,5 @@
 ## Home Thermostat
-## Version 1.01
+## Version 1.02
 #
 ## Setup ##
 import os
@@ -21,7 +21,7 @@ bedroom_1 = 72
 bedroom_2 = 72
 office = 75
 livingroom = 75
-external_temp = 85
+external_temp = 75
 #
 ## Average Zone Temperatures ##
 bedrooms_sum = bedroom_1 + bedroom_2
@@ -45,7 +45,7 @@ while True:
 	print 'program running'
 	if external_temp >= 70:
 		print 'cool'
-		if house >= 73:
+		if house >= 71:
 			print house
 			print 'ac on'
 			#GPIO.output(11, GPIO.LOW)
@@ -55,13 +55,35 @@ while True:
 			text_file.write('\n')
 			text_file.close()
 			time.sleep(60)
-		if house <= 70:
+		if house <= 69:
 			print house
 			print 'ac off'
 			#GPIO.output(11, GPIO.HIGH)
 			text_file = open("thermostat log.txt", "a")
 			text_file.write("Temperature" ' = '+ str(house) + '\n')
 			text_file.write("AC off" + ' - ' + str(now_time) + " - " + str(now_date) + '\n')
+			text_file.write('\n')
+			text_file.close()
+			time.sleep(60)
+	if external_temp < 70 and external_temp > 65:
+		print 'transisition'
+		if house >= 72:
+			print house
+			print 'trans ac on'
+			#GPIO.output(11, GPIO.LOW)
+			text_file = open("thermostat log.txt", "a")
+			text_file.write("Temperature" ' = ' + str(house) + '\n')
+			text_file.write("Trans AC on" + ' - ' + str(now_time) + " - " + str(now_date)+ '\n')
+			text_file.write('\n')
+			text_file.close()
+			time.sleep(60)
+		if house <= 70:
+			print house
+			print 'trans ac off'
+			#GPIO.output(11, GPIO.HIGH)
+			text_file = open("thermostat log.txt", "a")
+			text_file.write("Temperature" ' = '+ str(house) + '\n')
+			text_file.write("Trans AC off" + ' - ' + str(now_time) + " - " + str(now_date) + '\n')
 			text_file.write('\n')
 			text_file.close()
 			time.sleep(60)
