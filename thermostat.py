@@ -1,15 +1,20 @@
 ## Home Thermostat
-## Version 1.02
+## Version 1.03
 #
 ## Setup ##
 import os
 import time
 #import RPi.GPIO as GPIO
 #GPIO.setmode(GPIO.BOARD)
+##
 #GPIO.setup(11, GPIO.OUT)
+## GPIO 11 is AC ##
 #GPIO.setup(12, GPIO.OUT)
+## GPIO 12 is heat ##
 #GPIO.setup(14, GPIO.OUT)
+## GPIO 14 is fan ##
 #GPIO.setup(15, GPIO.OUT)
+#
 #GPIO.output(11, GPIO.HIGH)
 #GPIO.output(12, GPIO.HIGH)
 #GPIO.output(14, GPIO.HIGH)
@@ -45,6 +50,9 @@ while True:
 	print 'program running'
 	if external_temp >= 70:
 		print 'cool'
+		#GPIO.output(14, GPIO.LOW)
+		#time.sleep(120)
+		#GPIO.output(14, GPIO.HIGH)
 		if house >= 71:
 			print house
 			print 'ac on'
@@ -67,6 +75,9 @@ while True:
 			time.sleep(60)
 	if external_temp < 70 and external_temp > 65:
 		print 'transisition'
+		#GPIO.output(14, GPIO.LOW)
+		#time.sleep(300)
+		#GPIO.output(14, GPIO.HIGH)
 		if house >= 72:
 			print house
 			print 'trans ac on'
@@ -89,6 +100,9 @@ while True:
 			time.sleep(60)
 	if external_temp <= 65:
 		print 'heat'
+		#GPIO.output(14, GPIO.LOW)
+		#time.sleep(120)
+		#GPIO.output(14, GPIO.HIGH
 		if house <= 68:
 			print house
 			print 'heat on'
