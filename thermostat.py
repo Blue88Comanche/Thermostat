@@ -6,15 +6,20 @@ import os
 import time
 #import RPi.GPIO as GPIO
 #GPIO.setmode(GPIO.BOARD)
-##
+## GPIO ##
 #GPIO.setup(11, GPIO.OUT)
 ## GPIO 11 is AC ##
+#
 #GPIO.setup(12, GPIO.OUT)
 ## GPIO 12 is heat ##
+#
 #GPIO.setup(14, GPIO.OUT)
 ## GPIO 14 is fan ##
-#GPIO.setup(15, GPIO.OUT)
 #
+#GPIO.setup(15, GPIO.OUT)
+##
+#
+##
 #GPIO.output(11, GPIO.HIGH)
 #GPIO.output(12, GPIO.HIGH)
 #GPIO.output(14, GPIO.HIGH)
@@ -22,10 +27,10 @@ import time
 #
 ## Test Vairables ##
 # these values are here because i dont have temperature sensors #
-bedroom_1 = 72
-bedroom_2 = 72
-office = 75
-livingroom = 75
+bedroom_1 = 68
+bedroom_2 = 68
+office = 71
+livingroom = 70
 external_temp = 75
 #
 ## Average Zone Temperatures ##
@@ -74,27 +79,27 @@ while True:
 			text_file.close()
 			time.sleep(60)
 	if external_temp < 70 and external_temp > 65:
-		print 'transisition'
+		print 'transition'
 		#GPIO.output(14, GPIO.LOW)
 		#time.sleep(300)
 		#GPIO.output(14, GPIO.HIGH)
 		if house >= 72:
 			print house
-			print 'trans ac on'
+			print 'transition ac on'
 			#GPIO.output(11, GPIO.LOW)
 			text_file = open("thermostat log.txt", "a")
 			text_file.write("Temperature" ' = ' + str(house) + '\n')
-			text_file.write("Trans AC on" + ' - ' + str(now_time) + " - " + str(now_date)+ '\n')
+			text_file.write("transition AC on" + ' - ' + str(now_time) + " - " + str(now_date)+ '\n')
 			text_file.write('\n')
 			text_file.close()
 			time.sleep(60)
 		if house <= 70:
 			print house
-			print 'trans ac off'
+			print 'transition ac off'
 			#GPIO.output(11, GPIO.HIGH)
 			text_file = open("thermostat log.txt", "a")
 			text_file.write("Temperature" ' = '+ str(house) + '\n')
-			text_file.write("Trans AC off" + ' - ' + str(now_time) + " - " + str(now_date) + '\n')
+			text_file.write("transition AC off" + ' - ' + str(now_time) + " - " + str(now_date) + '\n')
 			text_file.write('\n')
 			text_file.close()
 			time.sleep(60)
