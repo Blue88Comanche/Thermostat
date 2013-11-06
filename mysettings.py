@@ -10,16 +10,16 @@ tran_off = 69
 heat_on = 68
 heat_off = 71
 ## Mode Settings ##
-cool = 70
+cool = 66
+heat = 65
 tran_1 = 69.99999999
 tran_2 = 65.00000001
-heat = 65
 ## Temperature readings ##
-bedroom_1 = 60
+bedroom_1 = 70
 bedroom_2 = 70
-office = 73
-livingroom = 73
-external_temp = 75
+office = 68
+livingroom = 60
+external_temp = 64
 ## Time Settings ##
 import time
 from datetime import datetime
@@ -57,13 +57,6 @@ if livingroom <= 40:
 	run = 0
 ############
 ## Issues ##
-# when internal average temp is 
-# 70 to 72 (all of 72 "72.9999"), 
-# the program will break and get stuck
-# in a loop at lines 57 to 59 "if house is 73:"
-#
-#
-#
-#
-#
-#
+'''
+I should put a list of issues here
+'''

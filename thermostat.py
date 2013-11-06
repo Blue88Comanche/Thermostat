@@ -3,27 +3,26 @@
 #
 ## Setup ##
 import os
-#import RPi.GPIO as GPIO
-#GPIO.setmode(GPIO.BOARD)
+'''import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BOARD)
 ## GPIO 11 = AC
-#GPIO.setup(11, GPIO.OUT)
+GPIO.setup(11, GPIO.OUT)
 #
 ## GPIO 12 = Heat
-#GPIO.setup(12, GPIO.OUT)
+GPIO.setup(12, GPIO.OUT)
 #
 ## GPIO 14 = Fan
-#GPIO.setup(14, GPIO.OUT)
+GPIO.setup(14, GPIO.OUT)
 #
 ## GPIO 15 = "All Systems Go" LED
-#GPIO.setup(15, GPIO.OUT)
+GPIO.setup(15, GPIO.OUT)
 #
-#GPIO.output(11, GPIO.HIGH)
-#GPIO.output(12, GPIO.HIGH)
-#GPIO.output(14, GPIO.HIGH)
-#GPIO.output(15, GPIO.HIGH)
+GPIO.output(11, GPIO.HIGH)
+GPIO.output(12, GPIO.HIGH)
+GPIO.output(14, GPIO.HIGH)
+GPIO.output(15, GPIO.HIGH)'''
 #
 ## Thermostat Program ##
-cycles = 0
 import mysettings
 from mysettings import *
 while run is 1:
@@ -33,14 +32,18 @@ while run is 1:
 	print 'starting program'
 	## Cool ##
 	while external_temp >= cool:
+		print
 		print now_time
 		print now_date
 		print 'program running'
 		from mysettings import *
 		print 'cool'
+		print
 		if house >= cool_on:
+			print
 			print house
 			print 'cool on'
+			print
 			#GPIO.output(12, GPIO.LOW)
 			text_file = open("thermostat log.txt", "a")
 			text_file.write("Temperature" ' = ' + str(house) + '\n')
@@ -50,8 +53,10 @@ while run is 1:
 			time.sleep(6)
 			reload(mysettings)
 		if house <= cool_off:
+			print
 			print house
 			print 'cool off'
+			print
 			#GPIO.output(12, GPIO.HIGH)
 			text_file = open("thermostat log.txt", "a")
 			text_file.write("Temperature" ' = '+ str(house) + '\n')
@@ -60,20 +65,32 @@ while run is 1:
 			text_file.close()
 			time.sleep(6)
 			reload(mysettings)
+		else:
+			reload(mysettings)
+			print
+			print 'waiting'
+			print now_time
+			print now_date
+			print
 		## Check Time ##
 		import time
 		time.sleep(0.25)
+		'''
 	## Transition ##
 	while external_temp >= tran_1 and external_temp <= tran_2:
+		print
 		print now_time
 		print now_date
 		print 'program running'
+		print
 		import mysettings
 		from mysettings import *
 		print 'Transition'
 		if house >= tran_on:
+			print
 			print house
 			print 'fan on'
+			print
 			#GPIO.output(14, GPIO.LOW)
 			text_file = open("thermostat log.txt", "a")
 			text_file.write("Temperature" ' = ' + str(house) + '\n')
@@ -82,6 +99,7 @@ while run is 1:
 			text_file.close()
 			time.sleep(120)
 			print 'fan off'
+			print
 			#GPIO.output(14, GPIO.HIGH)
 			text_file = open("thermostat log.txt", "a")
 			text_file.write("Temperature" ' = ' + str(house) + '\n')
@@ -90,7 +108,9 @@ while run is 1:
 			text_file.close()
 			reload(mysettings)
 			if house >= tran_on:
+				print
 				print 'ac on'
+				print
 				#GPIO.output(11, GPIO.LOW)
 				text_file = open("thermostat log.txt", "a")
 				text_file.write("Temperature" ' = ' + str(house) + '\n')
@@ -100,8 +120,10 @@ while run is 1:
 			time.sleep(6)
 			reload(mysettings)
 		if house <= tran_off:
+			print
 			print house
 			print 'ac off'
+			print
 			#GPIO.output(11, GPIO.HIGH)
 			text_file = open("thermostat log.txt", "a")
 			text_file.write("Temperature" ' = '+ str(house) + '\n')
@@ -110,9 +132,16 @@ while run is 1:
 			text_file.close()
 			time.sleep(6)
 			reload(mysettings)
+		else:
+			reload(mysettings)
+			print
+			print 'waiting'
+			print now_time
+			print now_date
+			print
 		## Check Time ##
 		import time
-		time.sleep(0.25)	
+		time.sleep(0.25)	'''
 	## Heat ##
 	while external_temp <= heat:
 		print now_time
@@ -142,6 +171,13 @@ while run is 1:
 			text_file.close()
 			time.sleep(6)
 			reload(mysettings)
+		else:
+			reload(mysettings)
+			print
+			print 'waiting'
+			print now_time
+			print now_date
+			print
 		## Check Time ##
 		import time
 		time.sleep(0.25)
@@ -151,6 +187,9 @@ while run is 1:
 	time.sleep(0.25)
 	reload(mysettings)
 if run is 0:
+	#GPIO.output(11, GPIO.HIGH)
+	#GPIO.output(12, GPIO.HIGH)
+	#GPIO.output(14, GPIO.HIGH)
 	#GPIO.output(15, GPIO.HIGH)
 	text_file = open("thermostat log.txt", "a")
 	text_file.write("Temperature" ' = '+ str(house) + '\n')
